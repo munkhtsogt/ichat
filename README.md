@@ -14,6 +14,10 @@ Built with:
 <ul>
   <li>Node.js</li>
   <li>NPM (Node Package Manager)</li>
+  <li>HTML5</li>
+  <li>CSS3</li>
+  <li>jQuery</li>
+  <li>javascript</li>
   <li>MySQL >= 5.5</li>
 </ul>
 
