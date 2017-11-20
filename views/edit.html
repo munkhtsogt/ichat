@@ -1,0 +1,219 @@
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+        <link rel="stylesheet" href="/css/font-awesome/css/font-awesome.min.css" type="text/css">
+        <link rel="stylesheet" href="/css/style.css" type="text/css">
+        <script type="text/javascript" src="/js/jquery-1.11.1.min.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-fixed-top navbar-inverse" role="navigation" style="background-color: #404952;">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="{{ url }}/public" class="navbar-brand">
+                        <i class="fa fa-wechat"></i> iChat
+                    </a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="{{ url }}/public">
+                                <i class="fa fa-home"></i> Home
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        
+                        <li class="dropdown active">
+                            <a class="dropdown-toggle" data-toggle="dropdown">
+                                Hello, {{ user.username }}<span class="caret"></span> 
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li class="active">
+                                    <a href="{{ url }}/edit/{{user.id}}">
+                                        <i class="fa fa-cog"></i> Profile
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ url }}/logout">
+                                        <i class="fa fa-sign-out"></i> Logout
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container-fluid" style="margin-top: 60px;">
+            <div class="row-fluid">
+                <div class="col-sm-10">
+                    <h1>{{ user.username }}</h1>
+                </div>
+                <div class="col-sm-2">
+                    <div class="pull-right">
+                        {% if user.avatar %} 
+                            <img alt="/uploads/{{ user.avatar }}" src="/uploads/{{ user.avatar }}" class="img-circle img-responsive" style="width: 100px; height: 100px"/> 
+                        {% else %}
+                            <img src="/images/default.png" class="img-circle img-responsive" style="width: 100px; height: 100px"/>    
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <div class="col-sm-3">
+                    <ul class="list-group">
+                        <li class="list-group-item text-muted">
+                            User Info
+                        </li>
+                        <li class="list-group-item text-right">
+                            <span class="pull-left"><strong>Greeting:</strong></span>
+                            {% if user.greeting %}
+                                {{ user.greeting }}
+                            {% else %}
+                                &nbsp;
+                            {% endif %}
+                        </li>
+                        <li class="list-group-item text-right">
+                            <span class="pull-left"><strong>Is Moderator:</strong></span> 
+                            {% if user.is_moderator %}
+                                Тийм
+                            {% else %}
+                                Үгүй
+                            {% endif %}
+                        </li>
+                        <li class="list-group-item text-right">
+                            <span class="pull-left"><strong>Email:</strong></span> 
+                            {% if user.email %}
+                                {{ user.email }}
+                            {% else %}
+                                &nbsp;
+                            {% endif %}
+                        </li>
+                        <li class="list-group-item text-right">
+                            <span class="pull-left"><strong>Username:</strong></span> 
+                            {{ user.username }}
+                        </li>
+                        <li class="list-group-item text-right">
+                            <span class="pull-left"><strong>Gender:</strong></span> 
+                            {% if user.gender == 'male' %}
+                                Male
+                            {% elif user.gender == 'female' %}
+                                Female
+                            {% else %}
+                                &nbsp;    
+                            {% endif %}
+                        </li>
+                        <li class="list-group-item text-right">
+                            <span class="pull-left"><strong>Age:</strong></span>
+                            {% if user.age %}
+                                {{ user.age }}
+                            {% else %}
+                                &nbsp;
+                            {% endif %}
+                        </li>
+                    </ul>
+                    
+                    <div id="alert-danger" class="alert alert-danger" role="alert" style="display: none;">
+                        <strong>Warning!</strong> Repeated password is wrong.
+                    </div>
+                </div>
+                
+                <div class="col-sm-9"> 
+                    <ul class="nav nav-tabs" id="myTab">
+                        <li class="active"><a href="#settings" data-toggle="tab">Settings</a></li>
+                        <!--li><a href="#logs" data-toggle="tab">Логууд</a></li-->
+                    </ul>
+                    <div class="tab-pane active" id="settings">
+                        <h2>Profile</h2>
+                        <form id="user-edit" action="{{ url }}/edit" method="POST" role="form" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label><span class="badge">Greeting</span></label>
+                                        <input type="text" name="greeting" class="form-control" value="{{ user.greeting }}"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Username</label>
+                                        <input type="text" name="username" class="form-control" value="{{ user.username }}"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        <input type="text" name="email" class="form-control" value="{{ user.email }}"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Age</label>
+                                        <input type="text" name="age" class="form-control" value="{{ user.age }}"/>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Avatar</label>
+                                        <input type="hidden" name="userid" value="{{ user.id }}"/>
+                                        <input type="file" name="avatar" class="form-control"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Gender</label>
+                                        <select name="gender" class="form-control">
+                                            <option value=""></option>
+                                            <option value="male"
+                                                {% if user.gender == 'male' %}
+                                                    selected
+                                                {% endif %}
+                                            >Male</option>
+                                            <option value="female"
+                                                {% if user.gender == 'female' %}
+                                                    selected
+                                                {% endif %}
+                                            >Female</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Password</label>
+                                        <input type="password" name="password" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Re-password</label>
+                                        <input type="password" name="confirm-password" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-success btn-block">
+                                    Update
+                                </butto>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+
+<script type="text/javascript">
+<!--
+    $(function(){
+         $('#user-edit button[type="submit"]').on('click', function(){
+            var password = $.trim($('#user-edit input[name="password"]').val());
+            var confirm_password = $.trim($('#user-edit input[name="confirm-password"]').val());
+            if(password.length != 0 && confirm_password.length != 0){
+                if(password != confirm_password){
+                    $('#user-edit input[name="confirm-password"]').focus();
+                    $('#alert-danger').show();
+                    return false;
+                }
+                else {
+                    $('#alert-danger').hide();
+                }
+            }
+        });
+    })
+-->
+</script>

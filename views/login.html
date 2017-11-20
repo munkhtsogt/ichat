@@ -1,0 +1,142 @@
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+        <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="css/auth-buttons.css">
+        <script type="text/javascript">
+        <!--
+            $(function(){
+                $('#login-form button[type="submit"]').on('click', function(){
+                    var email = $.trim($('#login-form input[name="email"]').val());
+                    if(email.length == 0) {
+                        $('#login-form input[name="email"]').focus();
+                        return false;
+                    }
+                    
+                    var password = $.trim($('#login-form input[name="password"]').val());
+                    if(password.length == 0) {
+                        $('#login-form input[name="password"]').focus();
+                        return false;
+                    }
+                })
+                
+                $('#reg-form button[type="submit"]').on('click', function(){
+                    var email = $.trim($('#reg-form input[name="email"]').val());
+                    if(email.length == 0){
+                        $('#reg-form input[name="email"]').focus();
+                        return false;
+                    }
+                    
+                    var password = $.trim($('#reg-form input[name="password"]').val());
+                    if(password.length == 0) {
+                        $('#reg-form input[name="password"]').focus();
+                        return false;
+                    }
+                });
+            })
+        -->
+        </script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-4">
+                    <h2>Terms & Conditions</h2>
+                    <blockquote>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </p>
+                        <footer>
+                            iChat
+                        </footer>
+                    </blockquote>
+                </div>
+                <div class="col-lg-4 col-md-4" style="margin-top: 20px;">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="#login-tab" role="tab" data-toggle="tab">Signin</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#reg-tab" role="tab" data-toggle="tab">Signup</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#forgot-tab" role="tab" data-toggle="tab">Change password</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="login-tab">
+                            <form id="login-form" role="form" action="{{ url }}" method="post">
+                                <div class="form-group">
+                                    <label>Email *</label>
+                                    <input type="email" name="email" class="form-control"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>Password *</label>
+                                    <input type="password" name="password" class="form-control"/>
+                                </div>
+                                <button class="btn btn-lg btn-primary btn-block" type="submit">
+                                    Signin
+                                </button>
+                                <button class="btn-auth btn-facebook btn-block" type="submit" style="width: 330px;">
+                                    Facebook login
+                                </button>
+                                <button class="btn-auth btn-google btn-block" type="submit" style="width: 330px;">
+                                    Google+ login
+                                </button>
+                                <button class="btn-auth btn-twitter btn-block" type="submit" style="width: 330px;">
+                                    Twitter login
+                                </button>
+                                <button class="btn-auth btn-yahoo btn-block" type="submit" style="width: 330px;">
+                                    Yahoo login
+                                </button>
+                            </form>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="reg-tab">
+                            <form id="reg-form" role="form" action="{{ url }}/registeration" method="post">
+                                <div class="form-group">
+                                    <label>Username</label>
+                                    <input type="text" name="username" class="form-control"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>Email *</label>
+                                    <input type="email" name="email" class="form-control"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>Password *</label>
+                                    <input type="password" name="password" class="form-control"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>Gender</label>
+                                    <select name="gender" class="form-control">
+                                        <option value="">Choose...</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                    </select>
+                                </div>
+                                <button class="btn btn-lg btn-primary btn-block" type="submit">
+                                    Save
+                                </button>
+                            </form>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="forgot-tab">
+                            <form id="forgot-form" role="form">
+                                <div class="form-group">
+                                    <label>Email *</label>
+                                    <input type="text" name="email" class="form-control"/>
+                                </div>
+                                <button class="btn btn-lg btn-primary btn-block" type="submit">
+                                    Send
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <h2>Follow us</h2>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
